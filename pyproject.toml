@@ -1,0 +1,76 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "extended-tokenizer"
+version = "0.1.0"
+description = "A 300K vocabulary BPE tokenizer trained on Wikipedia for LLM training"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "Marcelo", email = "marcelo@example.com" }
+]
+keywords = ["tokenizer", "bpe", "nlp", "llm", "transformers"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing :: Linguistic",
+]
+requires-python = ">=3.10"
+dependencies = [
+    "regex>=2023.0",
+    "tqdm>=4.0",
+    "requests>=2.0",
+    "mwparserfromhell>=0.6",
+    "huggingface-hub>=0.20.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0",
+]
+benchmark = [
+    "tiktoken>=0.5.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/marcelo-earth/extended-tokenizer"
+Repository = "https://github.com/marcelo-earth/extended-tokenizer"
+Documentation = "https://github.com/marcelo-earth/extended-tokenizer#readme"
+
+[project.scripts]
+extended-tokenizer = "extended_tokenizer.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["extended_tokenizer"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"
