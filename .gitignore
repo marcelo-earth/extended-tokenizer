@@ -79,8 +79,8 @@ dmypy.json
 *~
 
 # Data files
-data/
-vocab/
+/data/
+/vocab/
 *.xml.bz2
 *.json.bz2
 
